@@ -1,6 +1,6 @@
 Risky ={
     CallCops = true,                        --True if you want cops to be called by % chance
-    TTS = 3.5,                              --Time To Sell, How long to negotiate drug deal
+    TTS = 3.5,                              --Time To Sell, How long to negotiate drug deal(in seconds)
     Chance = {                              --Fun math stuff.
         NotI = 30,                          --Percent chance the buyer is not interested
         Sell = 50,                          --Percent chance to sell items
