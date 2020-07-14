@@ -22,6 +22,6 @@ server/server.lua lines 78-136
 
 I put these in here because it promotes player to player drug sales to increase RP.
 
-Give Credit where credit is due:
-All them nice ESX folks else this wouldnt do squat
+Give Credit where credit is due...
+All them nice ESX folks else this would'nt do squat
 esx_sell_master / ExoticNx
