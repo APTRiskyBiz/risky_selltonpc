@@ -1,3 +1,4 @@
+Risky ={}
 --Police Shit, some shit don't work yet...
 Risky.CallCops = true
 --Risky.CopsMore = true                             --If true then you will be able to sell drugs for more when there are on duty
