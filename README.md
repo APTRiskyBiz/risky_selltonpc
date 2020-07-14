@@ -27,3 +27,6 @@ Give Credit where credit is due...
 All them nice ESX folks else this would'nt do squat
 
 esx_sell_master by ExoticNx
+
+esx_drugs
+esx_drugeffects
