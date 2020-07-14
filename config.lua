@@ -1,24 +1,33 @@
-Risky ={}
---Police Shit, some shit don't work yet...
-Risky.CallCops = true
---Risky.CopsMore = true                             --If true then you will be able to sell drugs for more when there are on duty
---Risky.CopsCount = 0                               --Required amount of cops to be online for drugs to be able to sell for more
---Risky.CopsNet = 300                               --How much more drugs will sell for when cops are on(per individual drug)
-
---Risky.CopsWarn = 30                               --Percent chance cops will be called
---Risky.PedsDec = 25                                --Percent chance a ped will decline you offering drugs
-Risky.Account = 'black_money'                       --Don't Change this... yet.  I will add functionality for this later. Has to stay black money for now.
-Risky.Item1 = 'weed'                                --Names of the items use per your database(will add more later.)
-Risky.Item2 = 'coke'
-Risky.Item3 = 'meth'
-Risky.Item4 = 'heroin'
-
-Risky.Item1Count = math.random(1, 3)                 --Number of Drugs sold when successful (min, max)
-Risky.Item2Count = math.random(1, 3)                 --If you want players to only sell 1 drug at a time, replace math.random(1, 3) with "1" Ex. Risky.WeedCount = 1
-Risky.Item3Count = math.random(1, 3)
-Risky.Item4Count = math.random(1, 3)
-
-Risky.Item1Price = math.random(420, 420)             --Price drugs will sell for each drug (min, max)
-Risky.Item2Price = math.random(650, 900)
-Risky.Item3Price = math.random(700, 950)
-Risky.Item4Price = math.random(650, 925)
+Risky ={
+    CallCops = true,                        --True if you want cops to be called by % chance
+    TTS = 3.5,                              --Time To Sell, How long to negotiate drug deal
+    Chance = {                              --Fun math stuff.
+        NotI = 30,                          --Percent chance the buyer is not interested
+        Sell = 50,                          --Percent chance to sell items
+        CalC = 20,                          --Percent chance buyer will call cops.
+    },
+    I1 = {
+        Item = 'weed',                      --Name of Item in your database
+        Count = math.random(1, 3),          --Amount of drugs sold at a time (min, max)
+        Price = math.random(420, 420),      --Price drugs will sell for (min, max)
+        Acc = 'black_money',                --Account to be paid in. (DO NOT CHANGE THIS, IT WILL NOT WORK UNTIL I DECIDE HOW I WANT TO USE IT)
+    },
+    I2 = {
+        Item = 'coke',
+        Count = math.random(1, 3),
+        Price = math.random(650, 900),
+        Acc = 'black_money',
+    },
+    I3 = {
+        Item = 'meth',
+        Count = math.random(1, 3),
+        Price = math.random(700, 950),
+        Acc = 'black_money',
+    },
+    I4 = {
+        Item = 'heroin',
+        Count = math.random(1, 3),
+        Price = math.random(650, 925),
+        Acc = 'black_money',
+    },
+}
