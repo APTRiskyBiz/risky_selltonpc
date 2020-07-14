@@ -4,51 +4,51 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 RegisterNetEvent('risky_selltonpc:dodeal')
 AddEventHandler('risky_selltonpc:dodeal', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
-	local meth = xPlayer.getInventoryItem('meth').count
-	local coke = xPlayer.getInventoryItem('coke').count
-	local weed = xPlayer.getInventoryItem('weed').count
-	local hero = xPlayer.getInventoryItem('heroin').count
-	if weed > 0 and xPlayer ~= nil then
-		local weedprice = Risky.WeedPrice
-		local weedamount = Risky.WeedCount
+	local item1 = xPlayer.getInventoryItem(Risky.Item1).count
+	local item2 = xPlayer.getInventoryItem(Risky.Item2).count
+	local item3 = xPlayer.getInventoryItem(Risky.Item3).count
+	local item4 = xPlayer.getInventoryItem(Risky.Item4).count
+	if item1 >= 1 and xPlayer ~= nil then
+		local item1price = Risky.Item1Price
+		local item1amount = Risky.Item1Count
 
-		local weedfinal = weedprice * weedamount
+		local item1final = item1price * item1amount
 
-		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You sold ' .. weedamount .. ' weed for $' .. weedfinal, length = 4000 })
-		xPlayer.removeInventoryItem('weed', weedamount)
-		xPlayer.addAccountMoney('black_money', weedfinal)
+		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You sold ' .. item1amount .. ' '.. Risky.Item1  ..' for $' .. item1final, length = 4000 })
+		xPlayer.removeInventoryItem(Risky.item1, item1amount)
+		xPlayer.addAccountMoney(Risky.Account, item1final)
 
-	elseif coke > 0 and xPlayer ~= nil then
-		local cokeprice = Risky.CokePrice	
-		local cokeamount = Risky.CokeCount
+	elseif item2 > 1 and xPlayer ~= nil then
+		local item2price = Risky.Item2Price	
+		local item2amount = Risky.Item2Count
 	
-		local cokefinal = cokeprice * cokeamount
+		local item2final = item2price * item2amount
 	
-		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You sold ' .. cokeamount .. ' coke for $' .. cokefinal, length = 4000 })
-		xPlayer.removeInventoryItem('coke', cokeamount)
-		xPlayer.addAccountMoney('black_money', cokefinal)
+		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You sold ' .. item2amount .. ' '.. Risky.Item2  ..' for $' .. item2final, length = 4000 })
+		xPlayer.removeInventoryItem(Risky.Item2, item2amount)
+		xPlayer.addAccountMoney(Risky.Account, item2final)
 
-	elseif meth > 0 and xPlayer ~= nil then
-		local methprice = Risky.MethPrice
-		local methamount = Risky.MethCount
+	elseif item3 > 1 and xPlayer ~= nil then
+		local item3price = Risky.Item3Price
+		local item3amount = Risky.Item3Count
 	
-		local methfinal = methprice * methamount
+		local item3final = item3price * item3amount
 	
-		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You sold ' .. methamount .. ' meth for $' .. methfinal, length = 4000 })
-		xPlayer.removeInventoryItem('meth', methamount)
-		xPlayer.addAccountMoney('black_money', methfinal)
+		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You sold ' .. item3amount .. ' '.. Risky.Item3  ..' for $' .. item3final, length = 4000 })
+		xPlayer.removeInventoryItem(Risky.Item3, item3amount)
+		xPlayer.addAccountMoney(Risky.Account, item3final)
 
-	elseif hero > 0 and xPlayer ~= nil then
-		local heroprice = Risky.HeroPrice
-		local heroamount = Risky.HeroCount
+	elseif item4 > 1 and xPlayer ~= nil then
+		local item4price = Risky.Item4Price
+		local item4amount = Risky.Item4Count
 	
-		local herofinal = heroprice * heroamount
+		local item4final = item4price * item4amount
 	
-		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You sold ' .. heroamount .. ' heroin for $' .. herofinal, length = 4000 })
-		xPlayer.removeInventoryItem('heroin', heroamount)
-		xPlayer.addAccountMoney('black_money', herofinal)
-	elseif weed and coke and meth and hero < 1 and xPlayer ~= nil then
-		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'Come back when you are ready to become a REAL drug dealer, maybe next actually BRING drugs with you.', length = 4000 })
+		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You sold ' .. item4amount .. ' '.. Risky.Item4  ..' for $' .. item4final, length = 4000 })
+		xPlayer.removeInventoryItem(Risky.Item4, item4amount)
+		xPlayer.addAccountMoney(Risky.Account, item4final)
+	elseif item1 and item2 and item3 and item4 < 1 and xPlayer ~= nil then
+		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Come back when you are ready to become a REAL drug dealer, maybe next actually BRING drugs with you.', length = 4000 })
 	end
 end)
 
@@ -56,17 +56,17 @@ RegisterNetEvent('countdrug')
 AddEventHandler('countdrug', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
 	if xPlayer ~= nil then
-		local meth = xPlayer.getInventoryItem('meth').count
-		local coke = xPlayer.getInventoryItem('coke').count
-		local weed = xPlayer.getInventoryItem('weed').count
-		local hero = xPlayer.getInventoryItem('heroin').count
-		if weed >= 1 then
+		local item1 = xPlayer.getInventoryItem(Risky.Item1).count
+		local item2 = xPlayer.getInventoryItem(Risky.Item2).count
+		local item3 = xPlayer.getInventoryItem(Risky.Item3).count
+		local item4 = xPlayer.getInventoryItem(Risky.Item4).count
+		if item1 >= 1 then
 			TriggerClientEvent("confirmcount", source, true)
-		elseif coke >= 1 then
+		elseif item2 >= 1 then
 			TriggerClientEvent("confirmcount", source, true)
-		elseif meth >= 1 then
+		elseif item3 >= 1 then
 			TriggerClientEvent("confirmcount", source, true)
-		elseif hero >= 1 then
+		elseif item4 >= 1 then
 			TriggerClientEvent("confirmcount", source, true)
 		else
 			TriggerClientEvent("confirmcount", source, false)
