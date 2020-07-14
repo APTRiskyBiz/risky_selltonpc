@@ -25,4 +25,5 @@ I put these in here because it promotes player to player drug sales to increase 
 Give Credit where credit is due...
 
 All them nice ESX folks else this would'nt do squat
-esx_sell_master / ExoticNx
+
+esx_sell_master by ExoticNx
