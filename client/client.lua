@@ -108,24 +108,14 @@ function process()
 		TriggerEvent("animation", source)
 		Citizen.Wait(1500)
 		TriggerServerEvent('risky_selltonpc:dodeal')
-	else
-		if Risky.CallCops then
-			local playerCoords = GetEntityCoords(PlayerPedId())
-			streetName,_ = GetStreetNameAtCoord(playerCoords.x, playerCoords.y, playerCoords.z)
-			streetName = GetStreetNameFromHashKey(streetName)
-
-			exports['mythic_notify']:SendAlert('inform', 'Ditch the drugs, and bail.  They are calling the cops!', 4000)
-			SellFail()
-		end
+	elseif Risky.CallCops then
+		exports['mythic_notify']:SendAlert('inform', 'Ditch the drugs, and bail.  They are calling the cops!', 4000)
+		SellFail()
 	end
 	
 	selldrugs = false
 	SetPedAsNoLongerNeeded(ped2)
 end
-
-AddEventHandler('skinchanger:loadSkin', function(character)
-	playerGender = character.sex
-end)
 
 RegisterNetEvent('animation')  --Does the cool handshake thingy
 AddEventHandler('animation', function()
