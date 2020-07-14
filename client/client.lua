@@ -1,6 +1,7 @@
 ESX = nil
 selldrugs = false
 local hasdrugs = false
+local TSE = TriggerServerEvent
 
 Citizen.CreateThread(function()
   	while ESX == nil do
@@ -29,7 +30,7 @@ Citizen.CreateThread(function()
 			if not IsPedDeadOrDying(ped1) and not IsPedInAnyVehicle(ped1) then
                         local pType = GetPedType(ped1)
 				if ped1 ~= ped2 and not selldrugs and (IsPedAPlayer(ped1) == false and pType ~= 28) then
-					TriggerServerEvent('countdrug')  --Checks to make sure they have drugs
+					TSE('countdrug')  --Checks to make sure they have drugs
 					if hasdrugs then
 						local pos = GetEntityCoords(ped1)
 						DrawText3Ds(pos.x, pos.y, pos.z, 'Press ~g~E ~w~to sell drugs')
@@ -83,8 +84,8 @@ function process()
 	SetEntityAsMissionEntity(ped1)
 	TaskStandStill(ped1, 9.0)
 
-	exports['pogressBar']:drawBar(3000, 'Offering Drugs...')  --Remove this if you don't use pogressBars
-	Citizen.Wait(3500)
+	exports['pogressBar']:drawBar(Risky.TTS * 1000, 'Offering Drugs...')  --Remove this if you don't use pogressBars
+	Citizen.Wait(Risky.TTS * 1000)
 	
 	if ESX.PlayerData.job.name == 'police' then
 		exports['mythic_notify']:SendAlert('error', 'Your cover has blown, they know you work for the police', 4000)  --If anoyone wants any specific notification system to be used, I can put something in the readme later on how to change it.
@@ -100,14 +101,15 @@ function process()
 		return
 	end
 
-	local percent = math.random(1, 11)
+	local add = Risky.Chance.NotI + Risky.Chance.Sell + Risky.Chance.CalC
+	local percent = math.random(1, add)
 
-	if percent <= 4 then
+	if percent <= Risky.Chance.NotI then
 		exports['mythic_notify']:SendAlert('error', 'They are not interested.', 4000)
-	elseif percent <= 9 then
+	elseif percent <= Risky.Chance.NotI + Risky.Chance.Sell then
 		TriggerEvent("animation", source)
 		Citizen.Wait(1500)
-		TriggerServerEvent('risky_selltonpc:dodeal')
+		TSE('risky_selltonpc:dodeal')
 	elseif Risky.CallCops then
 		exports['mythic_notify']:SendAlert('inform', 'Ditch the drugs, and bail.  They are calling the cops!', 4000)
 		SellFail()
@@ -132,7 +134,7 @@ end)
 function SellFail()  --Sends a message to the PoPo
     local coords = GetEntityCoords(GetPlayerPed(-1))
 
-    TriggerServerEvent('esx_phone:send', "police", '10-66 Suspicious person spotted attempting to sell drugs on '.. streetName ..'. Sending location.' , true, {
+    TSE('esx_phone:send', "police", '10-66 Suspicious person spotted attempting to sell drugs. Sending location.' , true, {
     	x = coords.x,
         y = coords.y,
         z = coords.z
